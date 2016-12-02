@@ -1,4 +1,4 @@
-package day01;
+package utils;
 
 public class Position {
     public final int x, y;
@@ -6,6 +6,14 @@ public class Position {
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public Position add(Position p) {
+        return new Position(x + p.x, y + p.y);
+    }
+
+    public Position subtract(Position p) {
+        return new Position(x - p.x, y - p.y);
     }
 
     @Override

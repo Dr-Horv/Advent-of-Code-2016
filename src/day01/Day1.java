@@ -1,5 +1,7 @@
 package day01;
+import utils.Direction;
 import utils.FileReader;
+import utils.Position;
 import utils.Solver;
 
 import java.util.LinkedList;

@@ -1,6 +1,6 @@
-package day01;
+package utils;
 
-enum Direction {
+public enum Direction {
     NORTH(0, -1),
     SOUTH(0, 1),
     WEST(-1, 0),
