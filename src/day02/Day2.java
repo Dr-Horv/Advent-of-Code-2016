@@ -12,46 +12,50 @@ import java.util.stream.Stream;
 public class Day2 implements Solver {
 
     private static final HashMap<Position, String> posToCode = new HashMap<>();
-
-    private final boolean isPartOne;
     private Position pos;
 
     public Day2(boolean isPartOne) {
-        this.isPartOne = isPartOne;
 
         if(isPartOne) {
             pos = new Position(0,0);
-            posToCode.put(new Position(-1, 1), "1");
-            posToCode.put(new Position(-1, 0), "4");
-            posToCode.put(new Position(-1, -1), "7");
-
-            posToCode.put(new Position(0, 1), "2");
-            posToCode.put(new Position(0, 0), "5");
-            posToCode.put(new Position(0, -1), "8");
-
-            posToCode.put(new Position(1, 1), "3");
-            posToCode.put(new Position(1, 0), "6");
-            posToCode.put(new Position(1, -1), "9");
+            initNormalKeyPad();
         } else {
             pos = new Position(-2, 0);
-            posToCode.put(new Position(0, 0), "7");
-            posToCode.put(new Position(0, 1), "3");
-            posToCode.put(new Position(0, 2), "1");
-            posToCode.put(new Position(0, -1), "B");
-            posToCode.put(new Position(0, -2), "D");
-
-            posToCode.put(new Position(-1, 1), "2");
-            posToCode.put(new Position(-1, 0), "6");
-            posToCode.put(new Position(-1, -1), "A");
-
-            posToCode.put(new Position(1, 1), "4");
-            posToCode.put(new Position(1, 0), "8");
-            posToCode.put(new Position(1, -1), "C");
-
-            posToCode.put(new Position(-2, 0), "5");
-            posToCode.put(new Position(2, 0), "9");
+            initPart2Keypad();
         }
+    }
 
+    private void initPart2Keypad() {
+        posToCode.put(new Position(0, 0), "7");
+        posToCode.put(new Position(0, 1), "3");
+        posToCode.put(new Position(0, 2), "1");
+        posToCode.put(new Position(0, -1), "B");
+        posToCode.put(new Position(0, -2), "D");
+
+        posToCode.put(new Position(-1, 1), "2");
+        posToCode.put(new Position(-1, 0), "6");
+        posToCode.put(new Position(-1, -1), "A");
+
+        posToCode.put(new Position(1, 1), "4");
+        posToCode.put(new Position(1, 0), "8");
+        posToCode.put(new Position(1, -1), "C");
+
+        posToCode.put(new Position(-2, 0), "5");
+        posToCode.put(new Position(2, 0), "9");
+    }
+
+    private void initNormalKeyPad() {
+        posToCode.put(new Position(-1, 1), "1");
+        posToCode.put(new Position(-1, 0), "4");
+        posToCode.put(new Position(-1, -1), "7");
+
+        posToCode.put(new Position(0, 1), "2");
+        posToCode.put(new Position(0, 0), "5");
+        posToCode.put(new Position(0, -1), "8");
+
+        posToCode.put(new Position(1, 1), "3");
+        posToCode.put(new Position(1, 0), "6");
+        posToCode.put(new Position(1, -1), "9");
     }
 
     private Position getMovement(Position pos, String line) {
