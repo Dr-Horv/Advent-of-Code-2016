@@ -2,6 +2,7 @@ import day01.Day1;
 import day02.Day2;
 import day03.Day3;
 import day04.Day4;
+import day05.Day5;
 
 public class Main {
 
@@ -9,7 +10,8 @@ public class Main {
         //System.out.println(new Day1().solve());
         //System.out.println(new Day2(false).solve());
         //System.out.println(new Day3().solve());
-        System.out.println(new Day4().solve());
+        //System.out.println(new Day4().solve());
+        System.out.println(new Day5().solve());
     }
 
 }
