@@ -6,6 +6,9 @@ import day05.Day5;
 import day06.Day6;
 import day07.Day7;
 import day08.Day8;
+import day09.Day9;
+
+import java.util.Scanner;
 
 public class Main {
 
@@ -17,7 +20,9 @@ public class Main {
         //System.out.println(new Day5().solve());
         //System.out.println(new Day6().solve());
         //System.out.println(new Day7().solve());
-        System.out.println(new Day8().solve());
+        //System.out.println(new Day8().solve());
+        System.out.println(new Day9().solve());
+
     }
 
 }
