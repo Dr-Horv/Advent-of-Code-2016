@@ -9,10 +9,9 @@ public class Day8 implements Solver {
     @Override
     public String solve() {
 
-        Screen screen = new Screen(7, 3);
-        //Screen screen = new Screen(7, 3);
+        Screen screen = new Screen(50, 6);
 
-        Stream<String> input = FileReader.readFile("day08/input1");
+        Stream<String> input = FileReader.readFile("day08/input");
 
         String[] inputArr = input.toArray(String[]::new);
 
@@ -32,11 +31,10 @@ public class Day8 implements Solver {
                     screen.rotateX(arg, steps);
                 }
             }
-            System.out.println(screen.toString());
         }
 
 
-        //System.out.println(screen.toString());
+        System.out.println(screen.toString());
 
 
         return "" + screen.nbrActivePixels();
