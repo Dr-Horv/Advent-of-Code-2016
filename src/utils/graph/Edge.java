@@ -1,4 +1,4 @@
-package day11.graph;
+package utils.graph;
 
 
 public class Edge<E> {

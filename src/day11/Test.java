@@ -1,7 +1,7 @@
 package day11;
 
-import day11.graph.AStar;
-import day11.graph.Node;
+import utils.graph.AStar;
+import utils.graph.Node;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package day11;
 
-import day11.graph.Node;
-import day11.graph.NodeExpander;
+import utils.graph.Node;
+import utils.graph.NodeExpander;
 
 import java.util.ArrayList;
 import java.util.List;

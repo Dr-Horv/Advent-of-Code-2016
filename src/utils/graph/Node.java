@@ -1,4 +1,4 @@
-package day11.graph;
+package utils.graph;
 
 import java.util.ArrayList;
 
