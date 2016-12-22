@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Node<E> {
 
-    private ArrayList<Edge> neigbours;
+    private ArrayList<Edge<E>> neigbours;
     private final E element;
 
     public Node(E element) {
@@ -12,11 +12,11 @@ public class Node<E> {
         neigbours = new ArrayList<>();
     }
 
-    public void addEdge(Edge e) {
+    public void addEdge(Edge<E> e) {
         neigbours.add(e);
     }
 
-    public void removeEdge(Edge e) {
+    public void removeEdge(Edge<E> e) {
         neigbours.remove(e);
     }
 
@@ -24,7 +24,7 @@ public class Node<E> {
         return element;
     }
 
-    public ArrayList<Edge> getNeigbours() {
+    public ArrayList<Edge<E>> getNeigbours() {
         return neigbours;
     }
 
@@ -35,11 +35,18 @@ public class Node<E> {
 
         Node<?> node = (Node<?>) o;
 
-        return element != null ? element.equals(node.element) : node.element == null;
+        return element.equals(node.element);
     }
 
     @Override
     public int hashCode() {
         return element != null ? element.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "element=" + element +
+                '}';
     }
 }
