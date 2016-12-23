@@ -1,6 +1,7 @@
 import day10.Day10;
 import day11.Day11;
 import day12.Day12;
+import day13.Day13;
 
 public class Main {
 
@@ -16,8 +17,9 @@ public class Main {
         //System.out.println(new Day8().solve());
         //System.out.println(new Day9().solve());
         //System.out.println(new Day10().solve());
-        System.out.println(new Day11().solve());
+        //System.out.println(new Day11().solve());
         //System.out.println(new Day12().solve());
+        System.out.println(new Day13().solve());
 
         long now = System.currentTimeMillis();
 

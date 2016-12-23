@@ -4,12 +4,19 @@ import java.util.*;
 
 public class AStar {
 
+
     public static <E> List<Node<E>> search(Node<E> start, Node<E> goal, NodeExpander<Node<E>> expander) {
-        System.out.println("----SEARCH----");
-        System.out.println(start.getElement());
-        System.out.println();
-        System.out.println(goal.getElement());
-        System.out.println("--------------");
+        return search(start, goal, expander, true);
+    }
+
+    public static <E> List<Node<E>> search(Node<E> start, Node<E> goal, NodeExpander<Node<E>> expander, boolean verbose) {
+        if(verbose) {
+            System.out.println("----SEARCH----");
+            System.out.println(start.getElement());
+            System.out.println();
+            System.out.println(goal.getElement());
+            System.out.println("--------------");
+        }
 
         Set<Node<E>> closedSet = new HashSet<>();
         Set<Node<E>> openSet = new HashSet<>();
@@ -40,11 +47,13 @@ public class AStar {
 
 
             if (current.equals(goal)) {
-                System.out.println("Reached goal");
-                System.out.println("Explored: " + loop);
-                System.out.println("Open: " + openSet.size());
-                System.out.println("Closed " + closedSet.size());
-                return reconstructPath(cameFrom, current);
+                if(verbose) {
+                    System.out.println("Reached goal");
+                    System.out.println("Explored: " + loop);
+                    System.out.println("Open: " + openSet.size());
+                    System.out.println("Closed " + closedSet.size());
+                }
+                return reconstructPath(cameFrom, current, verbose);
             }
 
             openSet.remove(current);
@@ -69,13 +78,15 @@ public class AStar {
             }
         }
 
-        return new ArrayList<>();
+        return null;
 
 
     }
 
-    private static <E> List<Node<E>> reconstructPath(HashMap<Node<E>, Node<E>> cameFrom, Node<E> current) {
-        System.out.println("Reconstructing path");
+    private static <E> List<Node<E>> reconstructPath(HashMap<Node<E>, Node<E>> cameFrom, Node<E> current, boolean verbose) {
+        if(verbose) {
+            System.out.println("Reconstructing path");
+        }
         List<Node<E>> path = new ArrayList<>();
         while (cameFrom.keySet().contains(current)) {
             current = cameFrom.get(current);
