@@ -36,7 +36,7 @@ public class Test {
         WorldExpander expander = new WorldExpander();
         Node<World> s = new Node<>(startWorld);
         Node<World> g = new Node<>(goalWorld);
-        /List<Node<World>> list = AStar.search(s, n -> n.equals(g), expander);
+        List<Node<World>> list = AStar.search(s, n -> n.equals(g), expander);
         System.out.println("RESULT");
 
         for(Node<World> n : list) {
