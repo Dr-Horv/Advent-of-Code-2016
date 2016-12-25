@@ -25,6 +25,10 @@ public class StateExpander implements NodeExpander<Node<State>> {
 
         List<Node<State>> nodes = new ArrayList<>();
 
+        if(state.getPosition().equals(goal)) {
+            return nodes;
+        }
+
         if(state.isUp()) {
             Position newPos = state.getPosition().add(new Position(0, -1));
             addUpNeighbourIfNeeded(state, nodes, newPos, "U");
