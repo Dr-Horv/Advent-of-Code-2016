@@ -14,7 +14,7 @@ public class Day11 implements Solver {
     @Override
     public String solve() {
 
-        Stream<String> input = FileReader.readFile("day11/inputPart2");
+        Stream<String> input = FileReader.readFile("day11/input");
         String[] inputArr = input.toArray(String[]::new);
 
         State state = getStartState(inputArr);
@@ -32,7 +32,7 @@ public class Day11 implements Solver {
         System.out.println(gn.getElement());
         System.out.println("----");
 
-        List<Node<State>> result = AStar.search(sn, gn, new StateExpander());
+        List<Node<State>> result = AStar.search(sn, n -> n.equals(gn), new StateExpander());
 
 
         return "" + result.size();

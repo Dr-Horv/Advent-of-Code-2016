@@ -5,16 +5,16 @@ import java.util.*;
 public class AStar {
 
 
-    public static <E> List<Node<E>> search(Node<E> start, Node<E> goal, NodeExpander<Node<E>> expander) {
-        return search(start, goal, expander, true);
+    public static <E> List<Node<E>> search(Node<E> start, GoalFunction<Node<E>> goalFinder, NodeExpander<Node<E>> expander) {
+        return search(start, goalFinder, expander, true);
     }
 
-    public static <E> List<Node<E>> search(Node<E> start, Node<E> goal, NodeExpander<Node<E>> expander, boolean verbose) {
+    public static <E> List<Node<E>> search(Node<E> start, GoalFunction<Node<E>> goalFinder, NodeExpander<Node<E>> expander, boolean verbose) {
         if(verbose) {
             System.out.println("----SEARCH----");
             System.out.println(start.getElement());
             System.out.println();
-            System.out.println(goal.getElement());
+            //System.out.println(goal.getElement());
             System.out.println("--------------");
         }
 
@@ -46,7 +46,7 @@ public class AStar {
             }
 
 
-            if (current.equals(goal)) {
+            if (goalFinder.isGoal(current)) {
                 if(verbose) {
                     System.out.println("Reached goal");
                     System.out.println("Explored: " + loop);
@@ -88,6 +88,7 @@ public class AStar {
             System.out.println("Reconstructing path");
         }
         List<Node<E>> path = new ArrayList<>();
+        path.add(current);
         while (cameFrom.keySet().contains(current)) {
             current = cameFrom.get(current);
             path.add(current);

@@ -2,8 +2,6 @@ package day16;
 
 import utils.Solver;
 
-import java.util.Comparator;
-import java.util.stream.Collectors;
 
 public class Day16 implements Solver {
     @Override

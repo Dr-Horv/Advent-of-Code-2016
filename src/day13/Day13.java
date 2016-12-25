@@ -20,7 +20,7 @@ public class Day13 implements Solver {
         Node<Position> gn = new Node<>(goal);
         PositionExpander expander = new PositionExpander(number, goal);
 
-        List<Node<Position>> result = AStar.search(sn, gn, expander);
+        List<Node<Position>> result = AStar.search(sn, (n) -> n.equals(gn), expander);
         String part1 = "" + result.size();
 
         ArrayList<Position> valid = new ArrayList<>();
@@ -37,7 +37,7 @@ public class Day13 implements Solver {
                     continue;
                 }
 
-                List<Node<Position>> searchResult = AStar.search(sn, goalNode, newExpander, false);
+                List<Node<Position>> searchResult = AStar.search(sn, n -> n.equals(goalNode), newExpander, false);
                 if(searchResult != null && searchResult.size() <= 50) {
                     if(pos.equals(new Position(8,0))) {
                         System.out.println("Adding 8.0");
