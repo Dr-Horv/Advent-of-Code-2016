@@ -18,6 +18,8 @@ public class AStar {
             System.out.println("--------------");
         }
 
+        Long timestamp = System.currentTimeMillis();
+
         Set<Node<E>> closedSet = new HashSet<>();
         Set<Node<E>> openSet = new HashSet<>();
 
@@ -34,8 +36,15 @@ public class AStar {
         while (openSet.size() > 0) {
             loop++;
 
+            Long now = System.currentTimeMillis();
+            if((now - timestamp) > 10_000 ) {
+                timestamp = now;
+                printReport(closedSet, openSet, loop);
+            }
+
             int lowest = Integer.MAX_VALUE;
             Node<E> current = null;
+
 
             for (Node<E> n : openSet) {
                 Integer value = fScore.getOrDefault(n, Integer.MAX_VALUE);
@@ -49,9 +58,7 @@ public class AStar {
             if (goalFinder.isGoal(current)) {
                 if(verbose) {
                     System.out.println("Reached goal");
-                    System.out.println("Explored: " + loop);
-                    System.out.println("Open: " + openSet.size());
-                    System.out.println("Closed " + closedSet.size());
+                    printReport(closedSet, openSet, loop);
                 }
                 return reconstructPath(cameFrom, current, verbose);
             }
@@ -78,9 +85,19 @@ public class AStar {
             }
         }
 
+        if(verbose) {
+            printReport(closedSet, openSet, loop);
+        }
+
         return null;
 
 
+    }
+
+    private static <E> void printReport(Set<Node<E>> closedSet, Set<Node<E>> openSet, int loop) {
+        System.out.println("Explored: " + loop);
+        System.out.println("Open: " + openSet.size());
+        System.out.println("Closed " + closedSet.size());
     }
 
     private static <E> List<Node<E>> reconstructPath(HashMap<Node<E>, Node<E>> cameFrom, Node<E> current, boolean verbose) {
