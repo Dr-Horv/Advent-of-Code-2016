@@ -1,4 +1,4 @@
-package day23;
+package utils.assembunny;
 
 import java.util.Arrays;
 
@@ -42,12 +42,13 @@ public class Instruction {
         }
     }
 
-    enum Type {
+    public enum Type {
         COPY,
         INC,
         DEC,
         JUMP,
         TOGGLE,
+        OUT,
         NOP
     }
 

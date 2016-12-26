@@ -1,4 +1,4 @@
-package day23;
+package utils.assembunny;
 
 import java.util.HashMap;
 
@@ -12,6 +12,11 @@ public class AssemBunny {
             put("c", 0);
             put("d", 0);
         }};
+    }
+
+    public AssemBunny(int i) {
+        this();
+        registers.put("a", i);
     }
 
     public void incRegistry(String registry) {
