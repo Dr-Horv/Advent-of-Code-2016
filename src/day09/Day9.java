@@ -4,7 +4,11 @@ import utils.FileReader;
 import utils.Solver;
 
 import java.io.BufferedInputStream;
+import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class Day9 implements Solver {
@@ -14,62 +18,67 @@ public class Day9 implements Solver {
         Stream<String> input = FileReader.readFile("day09/input");
 
         String[] inputArr = input.toArray(String[]::new);
-        StringBuilder sb = new StringBuilder();
-        boolean inMarker = false;
-        boolean inFirstPart = true;
-        String firstPart = "";
-        String lastPart = "";
-        String parsed = "";
 
-        for(String line : inputArr) {
-            Scanner sc = new Scanner(line);
-            sc.useDelimiter("");
-            while(sc.hasNext()) {
-                char c = sc.next().charAt(0);
-                parsed += c;
-                //System.out.println(parsed);
+        String line = inputArr[0];
 
-                if(!inMarker && c == '(') {
-                    inMarker = true;
-                    firstPart = "";
-                    lastPart = "";
+        String regex = "\\((\\d+)x(\\d+)\\)";
+        Pattern pattern = Pattern.compile(regex);
+
+        int[] values = new int[line.length()];
+        Arrays.fill(values, 1);
+
+        while(true) {
+            Matcher m = pattern.matcher(line);
+
+            if(m.find()) {
+                String first = m.group(1);
+                String second = m.group(2);
+                String match = "(" + first+ "x" + second + ")";
+                int index = line.indexOf(match);
+
+                int f = Integer.parseInt(first);
+                int s = Integer.parseInt(second);
+
+                int repeatStartIndex = index + match.length();
+
+                for (int i = 0; i < f; i++) {
+                    values[repeatStartIndex + i] *= s;
+                }
+
+                for (int i = index; i < repeatStartIndex; i++) {
+                    values[i] = 0;
+                }
+
+                String part1 = line.substring(0, index);
+                String part2 = line.substring(repeatStartIndex);
+                line = part1 + part2;
+
+
+            } else {
+                break;
+            }
+
+            int[] newValues = new int[line.length()];
+
+            int i = 0;
+            for (int value : values) {
+                if (value == 0) {
                     continue;
                 }
-
-                if(inMarker) {
-                    if(c == ')') {
-                        inMarker = false;
-                        inFirstPart = true;
-
-                        int firstPartInt = Integer.parseInt(firstPart);
-                        int lastPartInt = Integer.parseInt(lastPart);
-                        String repeatPart = "";
-
-                        for (int i = 0; i < firstPartInt; i++) {
-                            repeatPart += sc.next();
-                        }
-
-                        for (int i = 0; i < lastPartInt; i++) {
-                            sb.append(repeatPart);
-                        }
-                    }
-
-                    if(inFirstPart) {
-                        if(c == 'x') {
-                            inFirstPart = false;
-                        } else {
-                            firstPart += c;
-                        }
-                    } else {
-                        lastPart += c;
-                    }
-                } else {
-                    sb.append(c);
-                }
-
+                newValues[i] = value;
+                i++;
             }
+
+            values = newValues;
+
         }
 
-        return "" + sb.toString().length();
+        Long totalValue = 0L;
+        for (int value : values) {
+            totalValue += value;
+        }
+
+
+        return totalValue + "";
     }
 }
