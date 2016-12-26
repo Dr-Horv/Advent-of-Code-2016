@@ -16,16 +16,13 @@ public class Day24 implements Solver {
         Stream<String> input = FileReader.readFile("day24/input");
         List<String> inputList = input.collect(Collectors.toList());
 
-        State start = new State(inputList);
+        StateExpander expander = new StateExpander(inputList);
 
+        State start = new State(expander.getStart(), expander.getNumbers());
         Node<State> sn = new Node<>(start);
         GoalFunction<Node<State>> gf = (n -> n.getElement().getNumbers().size() == 0);
 
-        StateExpander expander = new StateExpander();
-
         List<Node<State>> search = AStar.search(sn, gf, expander, true);
-
-        //search.forEach(n -> System.out.println(n.getElement()));
 
         if(search == null) {
             return "Found nothing";
