@@ -2,23 +2,39 @@ package day22;
 
 import utils.Position;
 
-public class Node {
+public class StorageNode {
     private final Position position;
     private int available;
     private int used;
     private boolean hasGoalData = false;
+    private Type type;
 
-    public Node(Position position, int available, int used) {
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    enum Type {
+        EMPTY,
+        BLOCKED,
+        MOVABLE
+    }
+
+    public StorageNode(Position position, int available, int used) {
         this.position = position;
         this.available = available;
         this.used = used;
     }
 
-    public Node(Node node) {
-        this.position = node.position;
-        this.available = node.available;
-        this.used = node.used;
-        this.hasGoalData = node.hasGoalData;
+    public StorageNode(StorageNode storageNode) {
+        this.position = storageNode.position;
+        this.available = storageNode.available;
+        this.used = storageNode.used;
+        this.hasGoalData = storageNode.hasGoalData;
+        this.type = storageNode.type;
     }
 
     public Position getPosition() {
@@ -55,11 +71,21 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node{" +
-                "position=" + position +
-                ", available=" + available +
-                ", used=" + used +
-                '}';
+        String s = "";
+        if(used < 10) {
+            s += " ";
+        }
+        s += used;
+        s += "/";
+        int total = used+available;
+
+        s += total;
+
+        if(total < 10) {
+            s += " ";
+        }
+
+        return s;
     }
 
     @Override
@@ -67,12 +93,13 @@ public class Node {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Node node = (Node) o;
+        StorageNode storageNode = (StorageNode) o;
 
-        if (available != node.available) return false;
-        if (used != node.used) return false;
-        if (hasGoalData != node.hasGoalData) return false;
-        return position.equals(node.position);
+        if(!position.equals(storageNode.position)) return false;
+        if (available != storageNode.available) return false;
+        if (used != storageNode.used) return false;
+
+        return hasGoalData == storageNode.hasGoalData;
     }
 
     @Override
